@@ -32,13 +32,22 @@ class PythonPackageTest(unittest.TestCase):
         self.assertIn('bda-validate = "bda_packer.validate:main"', pyproject)
         self.assertIn('bda-icon = "bda_packer.vx_icon:main"', pyproject)
 
-    def test_apache_license_metadata_and_notices_exist(self) -> None:
+    def test_dual_license_metadata_and_notices_exist(self) -> None:
         pyproject = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
-        self.assertIn('license = "Apache-2.0"', pyproject)
-        self.assertIn('license-files = ["LICENSE", "NOTICE"]', pyproject)
+        self.assertIn(
+            'license = "Apache-2.0 OR GPL-2.0-only"', pyproject)
+        self.assertIn(
+            'license-files = ["LICENSE", "LICENSE-GPL-2.0", "NOTICE"]',
+            pyproject,
+        )
         self.assertTrue((ROOT / "LICENSE").is_file())
+        self.assertTrue((ROOT / "LICENSE-GPL-2.0").is_file())
         self.assertTrue((ROOT / "NOTICE").is_file())
         self.assertIn("Apache License", (ROOT / "LICENSE").read_text(encoding="utf-8"))
+        self.assertIn(
+            "GNU GENERAL PUBLIC LICENSE",
+            (ROOT / "LICENSE-GPL-2.0").read_text(encoding="utf-8"),
+        )
         self.assertIn("Copyright 2026 HelloClyde", (ROOT / "NOTICE").read_text(encoding="utf-8"))
 
     def test_configured_sdk_include_takes_precedence(self) -> None:

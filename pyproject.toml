@@ -8,8 +8,8 @@ version = "0.1.0a1"
 description = "Compiler, packer, validator, and public headers for BBK 9588 native BDA applications"
 readme = "README.md"
 requires-python = ">=3.10"
-license = "Apache-2.0"
-license-files = ["LICENSE", "NOTICE"]
+license = "Apache-2.0 OR GPL-2.0-only"
+license-files = ["LICENSE", "LICENSE-GPL-2.0", "NOTICE"]
 authors = [{ name = "HelloClyde" }]
 classifiers = [
   "Development Status :: 3 - Alpha",
@@ -17,6 +17,7 @@ classifiers = [
   "Programming Language :: Python :: 3",
   "Programming Language :: Python :: 3 :: Only",
   "License :: OSI Approved :: Apache Software License",
+  "License :: OSI Approved :: GNU General Public License v2 (GPLv2)",
   "Topic :: Software Development :: Build Tools",
 ]
 
@@ -50,6 +51,7 @@ include = [
   "/CHANGELOG.md",
   "/DATA_NOTICE.md",
   "/LICENSE",
+  "/LICENSE-GPL-2.0",
   "/NOTICE",
   "/pyproject.toml",
 ]

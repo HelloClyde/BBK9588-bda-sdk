@@ -43,5 +43,5 @@ git status --short
 ```
 
 除非贡献者明确书面标记为 `Not a Contribution`，有意提交并被项目接收的贡献将按
-[Apache License 2.0](LICENSE) 第 5 节授权，不附加额外条款。贡献者必须有权提交相关
+`Apache-2.0 OR GPL-2.0-only` 双许可证授权，不附加额外条款。贡献者必须有权提交相关
 代码、文档或测试数据；固件和原机版权资源不能作为贡献提交。

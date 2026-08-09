@@ -1,14 +1,15 @@
 # BBK 9588 Native BDA SDK
 
 [![SDK CI](https://github.com/HelloClyde/bbk9588-bda-sdk/actions/workflows/sdk-ci.yml/badge.svg)](https://github.com/HelloClyde/bbk9588-bda-sdk/actions/workflows/sdk-ci.yml)
-[![License](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-Apache--2.0%20OR%20GPL--2.0--only-blue.svg)](#license)
 
 面向 BBK / 步步高 9588（C200）和 9688（C100）固件的原生 BDA 开发工具链。
 它可以把 freestanding MIPS little-endian C 源码编译成独立 `*.bda`，并提供经过
 动态验证的系统 API 头文件、示例和开发文档。
 
 > 当前版本：`0.1.0-alpha.1`。SDK 仍处于逆向验证阶段；模拟器验证不自动等同于
-> 真机验证。项目源码、公开头、文档和原创示例使用 Apache License 2.0。
+> 真机验证。项目源码、公开头、文档和原创示例使用
+> `Apache-2.0 OR GPL-2.0-only` 双许可证。
 
 ## 能做什么
 
@@ -115,8 +116,12 @@ SHA-256；下载的压缩包和解压目录均保持在 Git 忽略范围内。
 
 ## License
 
-本项目中有权授权的原创代码、文档和示例使用
-[Apache License 2.0](LICENSE)。`SPDX-License-Identifier: Apache-2.0`。
+本项目中有权授权的原创代码、文档和示例采用双许可证，使用者可以任选：
+
+- [Apache License 2.0](LICENSE)
+- [GNU General Public License v2 only](LICENSE-GPL-2.0)
+
+SPDX 表达式：`Apache-2.0 OR GPL-2.0-only`。
 
 该许可证不覆盖固件、NAND、原机应用和资源、商标、外部工具链或子模块中的第三方
 内容；具体边界见 [NOTICE](NOTICE) 和 [DATA_NOTICE.md](DATA_NOTICE.md)。
