@@ -91,6 +91,7 @@ class SdkDocsTest(unittest.TestCase):
                 "audio_pcm_api.md",
                 "controls_api.md",
                 "direct_framebuffer_api.md",
+                "file_management_api.md",
                 "file_selector_api.md",
                 "fs_flush_api.md",
                 "fs_write_api.md",
@@ -3339,6 +3340,68 @@ class SdkDocsTest(unittest.TestCase):
         )
         self.assertIn("void bda_fs_flush_all(void)", c200_notes)
         self.assertIn("真机物理断电仍未验证", verified + "\n" + c200_notes)
+
+    def test_file_management_api_is_public_after_crud_probe(self) -> None:
+        public_header = read("sdk/include/bda_filesystem.h")
+        runtime = read("sdk/include/bda/detail/runtime.h")
+        types = read("sdk/include/bda_types.h")
+        verified = read("docs/verified/file_management_api.md")
+        evidence = read(
+            "docs/verified/assets/file_management_probe_log.txt"
+        )
+        example = read(
+            "example/filesystem/file_management/file_management_demo.c"
+        )
+
+        for offset in [
+            "BDA_SDK_INTERNAL_FS_REMOVE     0x024u",
+            "BDA_SDK_INTERNAL_FS_RENAME     0x028u",
+            "BDA_SDK_INTERNAL_FS_RMDIR      0x034u",
+            "BDA_SDK_INTERNAL_FS_DISK_INFO  0x048u",
+            "BDA_SDK_INTERNAL_FS_GETCWD     0x050u",
+            "BDA_SDK_INTERNAL_FS_PATH_INFO  0x054u",
+            "BDA_SDK_INTERNAL_FS_STORAGE_READY 0x07cu",
+        ]:
+            self.assertIn(offset, runtime)
+
+        for name in [
+            "BDA_FS_DRIVE_A",
+            "BDA_FS_ATTR_DIRECTORY",
+            "BDA_FS_DISK_INFO_SIZE",
+            "BDA_FS_PATH_INFO_SIZE",
+            "bda_fs_disk_info_t",
+            "bda_fs_path_info_t",
+            "bda_fs_remove",
+            "bda_fs_rename",
+            "bda_fs_rmdir",
+            "bda_fs_disk_info",
+            "bda_fs_disk_total_bytes",
+            "bda_fs_disk_free_bytes",
+            "bda_fs_getcwd",
+            "bda_fs_path_info_init",
+            "bda_fs_path_info",
+            "bda_fs_path_info_is_dir",
+            "bda_fs_storage_ready",
+        ]:
+            self.assertIn(name, public_header)
+            self.assertIn(name, verified)
+
+        self.assertIn("typedef unsigned long long u64;", types)
+        self.assertNotIn("_like", public_header.lower())
+        self.assertNotIn("bda_research_sdk.h", example)
+        self.assertNotIn("_like", example)
+        self.assertIn("rmdir_nonempty=-1", evidence)
+        self.assertIn("old_after_rename=-1", evidence)
+        self.assertIn("new_after_remove=-1", evidence)
+        self.assertIn("dir_after_rmdir=-1", evidence)
+        self.assertIn("RESULT=PASS", evidence)
+        self.assertIn(
+            "20633563cc75126965fd75daba1e1e9a0543d78eaaf3adcbdcaa72bff673e80c",
+            verified,
+        )
+        self.assertTrue(
+            (ROOT / "example/filesystem/file_management/FileManagement.bda").is_file()
+        )
 
     def test_fs_chdir_mkdir_and_rmdir_are_documented_from_c200(self) -> None:
         header = SDK_HEADER.read_text(encoding="utf-8")

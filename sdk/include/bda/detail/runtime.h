@@ -62,12 +62,19 @@
 #define BDA_SDK_INTERNAL_FS_SEEK       0x010u
 #define BDA_SDK_INTERNAL_FS_TELL       0x014u
 #define BDA_SDK_INTERNAL_FS_ERROR      0x01cu
+#define BDA_SDK_INTERNAL_FS_REMOVE     0x024u
+#define BDA_SDK_INTERNAL_FS_RENAME     0x028u
 #define BDA_SDK_INTERNAL_FS_CHDIR      0x02cu
 #define BDA_SDK_INTERNAL_FS_MKDIR      0x030u
+#define BDA_SDK_INTERNAL_FS_RMDIR      0x034u
 #define BDA_SDK_INTERNAL_FS_FINDFIRST  0x03cu
 #define BDA_SDK_INTERNAL_FS_FINDNEXT   0x040u
 #define BDA_SDK_INTERNAL_FS_FINDCLOSE  0x044u
+#define BDA_SDK_INTERNAL_FS_DISK_INFO  0x048u
+#define BDA_SDK_INTERNAL_FS_GETCWD     0x050u
+#define BDA_SDK_INTERNAL_FS_PATH_INFO  0x054u
 #define BDA_SDK_INTERNAL_FS_FLUSH_ALL  0x074u
+#define BDA_SDK_INTERNAL_FS_STORAGE_READY 0x07cu
 
 #define BDA_SDK_INTERNAL_MEM_ALLOC 0x008u
 #define BDA_SDK_INTERNAL_MEM_FREE  0x00cu
@@ -96,6 +103,11 @@ static inline void *bda_sdk_internal_sys(void) {
 
 static inline void *bda_sdk_internal_mem(void) {
     return bda_sdk_internal_table(BDA_SDK_INTERNAL_MEM_TABLE_ADDR);
+}
+
+static inline int bda_sdk_internal_call0(void *table, u32 offset) {
+    typedef int (*fn_t)(void);
+    return ((fn_t)bda_sdk_internal_api(table, offset))();
 }
 
 static inline int bda_sdk_internal_call1(void *table, u32 offset, u32 a0) {

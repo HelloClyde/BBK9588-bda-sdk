@@ -18,7 +18,7 @@
 | [`bda_types.h`](../sdk/include/bda_types.h) | SDK 版本、基础类型和 handle |
 | [`bda_hardware.h`](../sdk/include/bda_hardware.h) | 9588/9688 机型与 JZ47xx 芯片识别 |
 | [`bda_memory.h`](../sdk/include/bda_memory.h) | freestanding 内存 helper 和 heap |
-| [`bda_filesystem.h`](../sdk/include/bda_filesystem.h) | 文件、seek、目录和枚举 |
+| [`bda_filesystem.h`](../sdk/include/bda_filesystem.h) | 文件读写、flush、管理、路径信息、容量和枚举 |
 | [`bda_input.h`](../sdk/include/bda_input.h) | 按键包、原始输入事件和高速触摸坐标读取 |
 | [`bda_time.h`](../sdk/include/bda_time.h) | tick、标称 1 ms counter、Frame 周期定时器和 delay |
 | [`bda_window.h`](../sdk/include/bda_window.h) | Frame、消息、事件泵和生命周期 |
@@ -42,6 +42,7 @@
 | 系统文件选择器 | [file_selector_api.md](verified/file_selector_api.md) | 8013 模拟器 |
 | 文件写入与读回 | [fs_write_api.md](verified/fs_write_api.md) | 8013 模拟器 |
 | 全局文件 flush | [fs_flush_api.md](verified/fs_flush_api.md) | 8013 模拟器强制断电 A/B |
+| 文件管理、路径信息与容量 | [file_management_api.md](verified/file_management_api.md) | 8013 模拟器 CRUD 闭环 |
 | 六键轮询 | [input_polling_api.md](verified/input_polling_api.md) | 8013 模拟器 |
 | 高速触摸坐标读取 | [touch_position_api.md](verified/touch_position_api.md) | 真机 |
 | GAMEBOY 式原始输入事件 | [raw_input_event_api.md](verified/raw_input_event_api.md) | 真机 |

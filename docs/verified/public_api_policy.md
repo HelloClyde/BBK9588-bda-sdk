@@ -48,6 +48,8 @@ SDK 尚未对外发布，不为仓库内部出现过的旧误名保留兼容别�
 - 系统帮助页：`docs/verified/help_page_api.md`
 - 文件写入与读回：`docs/verified/fs_write_api.md`
 - 全局 open-file flush 与强制断电 A/B：`docs/verified/fs_flush_api.md`
+- 文件删除、重命名、空目录删除、路径信息、容量和存储状态：
+  `docs/verified/file_management_api.md`
 - 六个实体键轮询：`docs/verified/input_polling_api.md`
 - 高速触摸逻辑坐标读取：`docs/verified/touch_position_api.md`
 - GAMEBOY 式全局原始输入事件流：`docs/verified/raw_input_event_api.md`

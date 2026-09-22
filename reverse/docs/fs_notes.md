@@ -103,6 +103,14 @@ C200 function-level evidence：
 BB 虚拟机、Eros 方块、三国霸业、九宫格、决战坦克、连连看、雷霆战机、黑白子等
 都有 `FS+0x018/+0x01c/+0x020` 的 file 状态 wrapper 调用点。
 
+2026-09-22 的独立 `FMAPI` 探针又在 8013 完整 NAND 中完成了创建、写入、路径查询、
+枚举、重命名、非空目录拒删、文件删除和空目录删除闭环。对应的稳定公开名称已进入
+`sdk/include/bda_filesystem.h`：`bda_fs_remove()`、`bda_fs_rename()`、
+`bda_fs_rmdir()`、`bda_fs_disk_info()`、`bda_fs_getcwd()`、
+`bda_fs_path_info()` 和 `bda_fs_storage_ready()`。下文保留 `_like`/`raw` 名称用于描述
+研究头和原始逆向过程；公开用法与动态边界见
+`docs/verified/file_management_api.md`。
+
 ## 删除文件
 
 `FS+0x024(path)` 是 remove/unlink 类调用。C200 table entry 目标为 `0x801717f4`，

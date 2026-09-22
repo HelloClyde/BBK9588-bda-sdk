@@ -13,7 +13,7 @@
 | `bda_types.h` | SDK 版本、freestanding 基础类型和 handle |
 | `bda_hardware.h` | 9588/9688 机型、JZ47xx 芯片和原始签名地址识别 |
 | `bda_memory.h` | `memset`、`memcpy`、堆分配与释放 |
-| `bda_filesystem.h` | 文件读写、全局 flush、seek、目录与枚举 |
+| `bda_filesystem.h` | 文件读写、flush、seek、增删改查、路径信息、容量与枚举 |
 | `bda_input.h` | 六键轮询、原始输入事件和高速触摸坐标读取 |
 | `bda_time.h` | 25 ms tick、标称 1 ms counter、Frame 周期定时器和 busy-wait delay |
 | `bda_window.h` | Frame、消息、事件泵和窗口生命周期 |
@@ -52,6 +52,7 @@ helper 位于 `bda/detail/runtime.h`，它是公开 wrapper 的实现细节，�
 - [窗口消息定时器](verified/window_timer_api.md)
 - [堆、seek 与目录服务](verified/runtime_services_api.md)
 - [全局文件 flush](verified/fs_flush_api.md)
+- [文件管理、路径信息与容量](verified/file_management_api.md)
 - [内建控件](verified/controls_api.md)
 - [Raw PCM 音频](verified/audio_pcm_api.md)
 - [实时 PCM 录音](verified/audio_capture_api.md)

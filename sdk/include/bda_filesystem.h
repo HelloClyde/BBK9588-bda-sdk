@@ -7,7 +7,11 @@
 #define BDA_SEEK_CUR 1
 #define BDA_SEEK_END 2
 
+#define BDA_FS_DRIVE_A 0u
+#define BDA_FS_ATTR_DIRECTORY 0x4000u
 #define BDA_FS_FIND_DATA_SIZE 0x220u
+#define BDA_FS_DISK_INFO_SIZE 0x10u
+#define BDA_FS_PATH_INFO_SIZE 0x18u
 
 typedef struct bda_fs_find_data {
     void *cursor;
@@ -19,6 +23,25 @@ typedef struct bda_fs_find_data {
     char name_or_path[0x20a];
     u32 aux;
 } bda_fs_find_data_t;
+
+typedef struct bda_fs_disk_info {
+    u32 total_clusters;
+    u32 free_clusters;
+    u32 sectors_per_cluster;
+    u32 bytes_per_sector;
+} bda_fs_disk_info_t;
+
+/* The three time words are firmware-native values, not standardized FAT fields. */
+typedef struct bda_fs_path_info {
+    s16 volume_index;
+    u16 attributes;
+    s16 volume_index_copy;
+    u16 reserved;
+    u32 size;
+    u32 time_raw_0;
+    u32 time_raw_1;
+    u32 time_raw_2;
+} bda_fs_path_info_t;
 
 /* File API backed by the verified FS table entries below. */
 static inline int bda_fs_fopen_raw(const char *path, const char *mode) {
@@ -96,6 +119,23 @@ static inline int bda_fs_error(int file) {
     return fn(file);
 }
 
+/* Remove one file. A missing path, directory path, or backend failure returns -1. */
+static inline int bda_fs_remove(const char *path) {
+    return bda_sdk_internal_call1(
+        bda_sdk_internal_fs(), BDA_SDK_INTERNAL_FS_REMOVE, (u32)path
+    );
+}
+
+/* Rename one file on the same volume. Cross-volume moves are not verified. */
+static inline int bda_fs_rename(const char *old_path, const char *new_path) {
+    return bda_sdk_internal_call2(
+        bda_sdk_internal_fs(),
+        BDA_SDK_INTERNAL_FS_RENAME,
+        (u32)old_path,
+        (u32)new_path
+    );
+}
+
 /*
  * Flush dirty data and metadata for every currently open file object.
  * This is a global operation, not fflush(file), and it does not close handles.
@@ -119,6 +159,70 @@ static inline int bda_fs_chdir(const char *path) {
 static inline int bda_fs_mkdir(const char *path) {
     return bda_sdk_internal_call1(
         bda_sdk_internal_fs(), BDA_SDK_INTERNAL_FS_MKDIR, (u32)path
+    );
+}
+
+/* Remove one empty directory. Non-empty directories return -1. */
+static inline int bda_fs_rmdir(const char *path) {
+    return bda_sdk_internal_call1(
+        bda_sdk_internal_fs(), BDA_SDK_INTERNAL_FS_RMDIR, (u32)path
+    );
+}
+
+static inline int bda_fs_disk_info(u32 drive, bda_fs_disk_info_t *info) {
+    return bda_sdk_internal_call2(
+        bda_sdk_internal_fs(),
+        BDA_SDK_INTERNAL_FS_DISK_INFO,
+        drive,
+        (u32)info
+    );
+}
+
+static inline u64 bda_fs_disk_total_bytes(const bda_fs_disk_info_t *info) {
+    return (u64)info->total_clusters *
+        (u64)info->sectors_per_cluster *
+        (u64)info->bytes_per_sector;
+}
+
+static inline u64 bda_fs_disk_free_bytes(const bda_fs_disk_info_t *info) {
+    return (u64)info->free_clusters *
+        (u64)info->sectors_per_cluster *
+        (u64)info->bytes_per_sector;
+}
+
+/* Returns the required byte count including the terminating NUL, or -1. */
+static inline int bda_fs_getcwd(char *buffer, bda_size_t size) {
+    return bda_sdk_internal_call2(
+        bda_sdk_internal_fs(),
+        BDA_SDK_INTERNAL_FS_GETCWD,
+        (u32)buffer,
+        size
+    );
+}
+
+static inline void bda_fs_path_info_init(bda_fs_path_info_t *info) {
+    (void)bda_memset(info, 0, sizeof(*info));
+}
+
+static inline int bda_fs_path_info(
+    const char *path, bda_fs_path_info_t *info
+) {
+    return bda_sdk_internal_call2(
+        bda_sdk_internal_fs(),
+        BDA_SDK_INTERNAL_FS_PATH_INFO,
+        (u32)path,
+        (u32)info
+    );
+}
+
+static inline int bda_fs_path_info_is_dir(const bda_fs_path_info_t *info) {
+    return (info->attributes & BDA_FS_ATTR_DIRECTORY) != 0u;
+}
+
+/* Lightweight storage state; callers must still check every file API result. */
+static inline int bda_fs_storage_ready(void) {
+    return bda_sdk_internal_call0(
+        bda_sdk_internal_fs(), BDA_SDK_INTERNAL_FS_STORAGE_READY
     );
 }
 

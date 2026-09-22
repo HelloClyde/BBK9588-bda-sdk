@@ -16,6 +16,7 @@ class SdkExamplesTest(unittest.TestCase):
         ("example/basic/hello_world/HelloWorld.bda", "HelloWorld", 9),
         ("example/filesystem/fs_write/FsWrite.bda", "FsWrite", 9),
         ("example/filesystem/fs_flush/FsFlush.bda", "FsFlush", 9),
+        ("example/filesystem/file_management/FileManagement.bda", "FileManage", 9),
         ("example/input/key_polling/KeyInput.bda", "KeyInput", 9),
         ("example/input/touch_crosshair/TouchCrosshair.bda", "TouchXY", 9),
         ("example/graphics/primitives/GraphicsPrimitives.bda", "Graphics", 9),
@@ -140,6 +141,12 @@ class SdkExamplesTest(unittest.TestCase):
     def test_fs_flush_example_builds(self) -> None:
         self.build_and_validate(
             "example/filesystem/fs_flush/fs_flush_power_demo.c", "FsFlush"
+        )
+
+    def test_file_management_example_builds(self) -> None:
+        self.build_and_validate(
+            "example/filesystem/file_management/file_management_demo.c",
+            "FileManage",
         )
 
     def test_key_msgbox_example_builds(self) -> None:

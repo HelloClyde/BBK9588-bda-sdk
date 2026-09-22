@@ -21,6 +21,8 @@
 - [文件写入 API](fs_write_api.md)：`fopen/fwrite/tell/error/close/reopen/read` 写入闭环。
 - [全局文件 flush API](fs_flush_api.md)：`FS+0x074` 无参数全局 writeback，以及
   8013 强制断电的有 flush/无 flush 4096-byte A/B 对照。
+- [文件管理 API](file_management_api.md)：`remove/rename/rmdir/getcwd/path info/disk info`
+  和 storage-ready 的 8013 增删改查闭环。
 - [实体键轮询 API](input_polling_api.md)：`GUI+0x5d4` 六键状态包和 Linux keycode 映射。
 - [高速触摸坐标 API](touch_position_api.md)：真机验证的 `GUI+0x6c0` 最新逻辑坐标读取。
 - [原始输入事件 API](raw_input_event_api.md)：真机验证的 `GUI+0x750` 触摸/实体键事件流和 GAMEBOY 式有界轮询。

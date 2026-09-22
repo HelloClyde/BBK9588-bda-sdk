@@ -39,6 +39,9 @@ All notable SDK and packer changes are recorded here. The project follows
 - Publish the no-argument global filesystem flush API after an 8013 forced
   power-cut A/B test preserved the flushed 4096-byte file while the unflushed
   control remained 0 bytes.
+- Publish file removal, rename, empty-directory removal, current-directory,
+  path metadata, disk-capacity, and storage-ready APIs after an 8013 CRUD and
+  cleanup verification loop.
 
 ## 0.1.0-alpha.1
 
