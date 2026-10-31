@@ -2,7 +2,7 @@
 #define BDA_SDK_H
 
 /*
- * Complete public SDK for the kj409588/C200 firmware.
+ * Public kj409588/C200 SDK and explicitly gated 9688 V2.32 media bindings.
  *
  * Applications may include this umbrella header for every verified module,
  * or include individual bda_*.h headers to keep dependencies explicit.
@@ -21,5 +21,6 @@
 #include "bda_dialogs.h"
 #include "bda_controls.h"
 #include "bda_audio.h"
+#include "bda_9688_media.h"
 
 #endif

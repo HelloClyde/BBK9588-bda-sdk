@@ -12,7 +12,7 @@ SDK 版本：`0.1.0-alpha.1`。这里的“通过”表示仓库存在独立测�
 | 目标 CPU | MIPS32 little-endian | 已确认 |
 | 目标固件 | BBK 9588 `kj409588` / C200 | 主要目标 |
 | 模拟器 | `bbk9588-emulator-v0.1.5`，端口 8013 | 动态验证基线 |
-| 真机 | BBK 9588 C200 | 部分 API 验证 |
+| 真机 | BBK 9588 C200；9688 C100 V2.32/JZ4740 | 按 API 分别验证 |
 
 ## API 验证范围
 
@@ -36,6 +36,12 @@ SDK 版本：`0.1.0-alpha.1`。这里的“通过”表示仓库存在独立测�
 | 内建控件、GIF、自定义控件 | 通过 | 未验证 | 控件依赖父 Frame 与消息分发 |
 | Raw PCM 22050/16/mono | 通过 | 通过 | 退出只调用系统 stop，禁止固定地址 AIC reset |
 | 实时 PCM 录音 16000/16/mono | 不支持 | 部分通过 | 9588/JZ4730 已通过；其他四个精确 profile 为静态候选；固定 4096-byte block |
+| 9688 QVGA 摄像头与 RGB565 转换 | 未验证 | JZ4740 通过 | 精确 V2.32；320×240 YUYV；13 帧预热；JZ4730 静态候选 |
+| 9688 固件持有 WAV 录音 | 未验证 | JZ4740 通过 | 异步 stop/callback/finish、3.072 s WAV 读回；不等同于 raw PCM capture |
+
+9688 专用媒体层见 [摄像头与原生 WAV 录音](verified/9688_media_api.md)。其
+`BDA_9688_SUPPORT_HARDWARE_VERIFIED` / `BDA_9688_SUPPORT_STATIC_CANDIDATE`
+独立于 `bda_audio_capture_*` 的成熟度；本次没有升级后者的 9688 绑定。
 
 ## 稳定性等级
 

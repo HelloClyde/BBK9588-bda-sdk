@@ -28,6 +28,10 @@ class SdkDocsTest(unittest.TestCase):
         self.assertTrue((ROOT / "reverse" / "bda_research_sdk.h").is_file())
         for header in [
             "bda_sdk.h",
+            "bda_9688_platform.h",
+            "bda_9688_camera.h",
+            "bda_9688_recording.h",
+            "bda_9688_media.h",
             "bda_types.h",
             "bda_hardware.h",
             "bda_memory.h",
@@ -53,6 +57,10 @@ class SdkDocsTest(unittest.TestCase):
             sdk_files,
             [
                 "include/bda/detail/runtime.h",
+                "include/bda_9688_camera.h",
+                "include/bda_9688_media.h",
+                "include/bda_9688_platform.h",
+                "include/bda_9688_recording.h",
                 "include/bda_audio.h",
                 "include/bda_controls.h",
                 "include/bda_dialogs.h",
@@ -86,6 +94,7 @@ class SdkDocsTest(unittest.TestCase):
         self.assertEqual(
             verified_docs,
             [
+                "9688_media_api.md",
                 "README.md",
                 "audio_capture_api.md",
                 "audio_pcm_api.md",
@@ -131,6 +140,10 @@ class SdkDocsTest(unittest.TestCase):
         self.assertIn("只保存动态验证后公开的 API", sdk_readme)
         for header in [
             "bda_sdk.h",
+            "bda_9688_platform.h",
+            "bda_9688_camera.h",
+            "bda_9688_recording.h",
+            "bda_9688_media.h",
             "bda_hardware.h",
             "bda_memory.h",
             "bda_filesystem.h",

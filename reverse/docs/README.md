@@ -676,3 +676,15 @@ Element 风格显示实验的真机回归链路。
 `usb_debug_notes.md` 记录第一版 USB 大容量存储命令/日志调试桥；
 `game_api_verification_progress.md` 记录游戏候选系统 API 的分级动态验证进度；
 `verification_notes.md` 记录当前 SDK/toolchain 的 verify 覆盖和风险边界。
+
+## 9688 媒体 API 已公开
+
+9688 V2.32 的摄像头和固件持有 WAV 录音已迁入公开 SDK，文档见
+[9688 媒体 API](../../docs/verified/9688_media_api.md)。JZ4740 有真机 EXEC 动态闭环，
+JZ4730 仍为静态候选；新示例仅完成编译和静态校验：
+
+- `example/system/camera/camera_demo.c`：13 帧预热、最后帧转换和关闭。
+- `example/system/recording/recording_demo.c`：只读入口与异步录音生命周期 helper。
+
+该高层 WAV 路径与 `bda_audio_capture_*` raw PCM capture 独立，不升级后者的
+9688 静态 profile。

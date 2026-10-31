@@ -134,7 +134,7 @@
 | GUI | +0x5d4 | `BDA_GUI_INPUT_PACKET_LIKE` | 9 | 9 | 中 | GAMEBOY/input 按键包 helper；C200 清 6 byte packet 后写入按键状态。 |
 | GUI | +0x670 | `BDA_GUI_DECODE_BMP_LIKE` | 7 | 4 | 中 | BMP/VX decode；C200 使用 owner,out,path,out_source_buffer，VX 快路径会写回 file buffer pointer。 |
 | GUI | +0x6a8 | `BDA_GUI_FILE_SELECTOR_OPEN_LIKE` | 30 | 29 | 中 | file selector open/session；C200 只读取 a0=mode，内部构造 modal frame。 |
-| GUI | +0x6b0 | `BDA_GUI_SCREEN_BUFFER_LIKE` | 19 | 2 | 中 | 内部 screen/framebuffer pointer getter；无参数，不是 allocator；正式 API 通过该入口动态取址并校验 KSEG、范围、对齐和方向，不固定物理地址。 |
+| GUI | +0x6b0 | `BDA_GUI_SCREEN_BUFFER_LIKE` | 19 | 2 | 中 | 内部 screen/framebuffer pointer getter；无参数，不是 allocator；正式 API 通过该入口动态取址并校验 KSEG、范围、对齐和方向，不固定物理地址。裸候选返回值不要直接写或自定义 present。 |
 | GUI | +0x6b8 | `BDA_GUI_LIST_NTH_LIKE` | 23 | 18 | 中 | 链表第 N 项 helper；C200 使用 a0=head、a1=index，不是无参数 selector get。 |
 | GUI | +0x6bc | `BDA_GUI_LIST_FREE_LIKE` | 37 | 18 | 中 | linked list free helper；C200 将 a0=head 传给 0x8003e868，释放节点和节点 data，不是无参数 selector close。 |
 | GUI | +0x6c0 | `BDA_GUI_TOUCH_POSITION_LIKE` | 4 | 3 | 高 | raw-to-logical 最新触摸坐标 getter；a0/a1 为 u16 output pointer，结果裁剪到 240x320；FastTouchV3 已在真机高频动态验证，公开为 `bda_gui_touch_position()`。 |

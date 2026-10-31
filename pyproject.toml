@@ -26,6 +26,8 @@ reverse = ["capstone>=5.0.0"]
 dev = [
   "build>=1.2.2",
   "capstone>=5.0.0",
+  "pyelftools>=0.32",
+  "unicorn>=2.1.4",
 ]
 
 [project.scripts]

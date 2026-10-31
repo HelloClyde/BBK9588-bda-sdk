@@ -18,6 +18,7 @@
 - 静态验证 BDA header、checksum、入口和图标区
 - 使用已验证的文件、窗口、绘图、输入、对话框、控件和 raw PCM API
 - 通过型号、芯片和机器码三重门禁选择 9588/9688 JZ47xx 录音 profile
+- 在 9688 V2.32/JZ4740 上使用真机验证的 QVGA 摄像头与固件原生 WAV 录音 API
 - 运行带源码和预编译 BDA 的完整示例，包括触摸十字、控件和扫雷
 - 在专用 NAND 副本中自动部署 BDA 到 8013 模拟器
 
@@ -63,7 +64,9 @@ bda-validate build\HelloWorld.bda
 公开应用只应包含 [`sdk/include/`](sdk/include/) 中的头文件。未经完整动态验证的
 候选接口位于 `reverse/bda_research_sdk.h`，只能用于探针，不能作为稳定 SDK API。
 已验证 API 的附加精确固件绑定会通过公开成熟度字段标明
-`STATIC_CANDIDATE`，不能据此宣称对应真机已经通过。
+`STATIC_CANDIDATE`，不能据此宣称对应真机已经通过。9688 摄像头与原生 WAV 录音
+见 [媒体 API](docs/verified/9688_media_api.md)：JZ4740 为真机验证，JZ4730 保持静态候选；
+这不升级既有 raw PCM capture profile 的验证等级。
 
 ## 项目结构
 

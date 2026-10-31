@@ -5,7 +5,7 @@
 未命名 candidate 来自原机 BDA inventory 的高频 offset；candidate 只说明某个 table+offset 组合有 C200 function pointer，不等于 ABI 已确认。
 
 - C200 加载基址：`0x80004000`
-- 固件文件：`build\minesweeper_snapshot\系统\数据\C200.bin`
+- 固件文件：`系统\数据\C200.bin`
 
 ## Runtime Table Seeds
 
@@ -150,7 +150,7 @@ C200 会把 `0x80281680` 处的 8 个 word 复制到 `0x81c00000`，原生 BDA �
 | GUI | +0x5d4 | `BDA_GUI_INPUT_PACKET_LIKE` | `0x80281434` | `0x8001b518` | 是 | `addiu $sp, $sp, -0x18` | GAMEBOY/input 按键包 helper；C200 清 6 byte packet 后写入按键状态。 |
 | GUI | +0x670 | `BDA_GUI_DECODE_BMP_LIKE` | `0x802814d0` | `0x800e1f74` | 是 | `addiu $sp, $sp, -0x38` | BMP/VX decode；C200 使用 owner,out,path,out_source_buffer，VX 快路径会写回 file buffer pointer。 |
 | GUI | +0x6a8 | `BDA_GUI_FILE_SELECTOR_OPEN_LIKE` | `0x80281508` | `0x80021334` | 是 | `addiu $sp, $sp, -0x5e0` | file selector open/session；C200 只读取 a0=mode，内部构造 modal frame。 |
-| GUI | +0x6b0 | `BDA_GUI_SCREEN_BUFFER_LIKE` | `0x80281510` | `0x80010d94` | 是 | `lui $v0, 0x8034` | 内部 screen/framebuffer pointer getter；无参数，不是 allocator；不要直接写或自定义 present。 |
+| GUI | +0x6b0 | `BDA_GUI_SCREEN_BUFFER_LIKE` | `0x80281510` | `0x80010d94` | 是 | `lui $v0, 0x8034` | 内部 screen/framebuffer pointer getter；无参数，不是 allocator；正式 API 通过该入口动态取址并校验 KSEG、范围、对齐和方向，不固定物理地址。裸候选返回值不要直接写或自定义 present。 |
 | GUI | +0x6b8 | `BDA_GUI_LIST_NTH_LIKE` | `0x80281518` | `0x80042ed8` | 是 | `blez $a1, 0x80042f00` | 链表第 N 项 helper；C200 使用 a0=head、a1=index，不是无参数 selector get。 |
 | GUI | +0x6bc | `BDA_GUI_LIST_FREE_LIKE` | `0x8028151c` | `0x80042ebc` | 是 | `addiu $sp, $sp, -0x18` | linked list free helper；C200 将 a0=head 传给 0x8003e868，释放节点和节点 data，不是无参数 selector close。 |
 | GUI | +0x6c0 | `BDA_GUI_TOUCH_POSITION_LIKE` | `0x80281520` | `0x8001a3a0` | 是 | `addiu $sp, $sp, -0x58` | raw-to-logical 最新触摸坐标 getter；a0/a1 为 u16 output pointer，结果裁剪到 240x320；FastTouchV3 已在真机高频动态验证，公开为 `bda_gui_touch_position()`。 |

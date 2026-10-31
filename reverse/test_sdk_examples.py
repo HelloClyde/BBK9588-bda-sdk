@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+import os
 import subprocess
 import sys
 import unittest
@@ -39,7 +40,7 @@ class SdkExamplesTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        prefix = bundled_prefix() or "mipsel-none-elf-"
+        prefix = os.environ.get("BDA_TOOLCHAIN_PREFIX") or bundled_prefix() or "mipsel-none-elf-"
         try:
             find_tool(prefix, "gcc")
             find_tool(prefix, "objcopy")
@@ -291,6 +292,12 @@ class SdkExamplesTest(unittest.TestCase):
         self.build_and_validate(
             "example/system/audio_capture/audio_capture_demo.c", "AudioCapture"
         )
+
+    def test_9688_camera_example_builds(self) -> None:
+        self.build_and_validate("example/system/camera/camera_demo.c", "9688Camera")
+
+    def test_9688_recording_example_builds(self) -> None:
+        self.build_and_validate("example/system/recording/recording_demo.c", "9688Record")
 
     def test_record_stream_hardware_probe_v1_builds(self) -> None:
         self.build_and_validate(

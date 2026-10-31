@@ -1,0 +1,202 @@
+{
+  "id": "9688-v232-jz4730",
+  "name": "BBK 9688 V2.32 JZ4730",
+  "soc": "JZ4730",
+  "firmware_version": "V2.32",
+  "load_base": "0x80004000",
+  "runtime_base": "0x81c00000",
+  "sdram_start": "0x80004000",
+  "sdram_end": "0x82000000",
+  "firmware": {
+    "format": "raw",
+    "name": "C100.bin",
+    "size": 4871720,
+    "sha256": "b18ce485a6ca6a8ea9ef5e3963d5970188ff7a2aeb4a6d4e58fe43625f49e514",
+    "load_base": "0x80004000"
+  },
+  "packed_firmware": {
+    "name": "C100knl.bin",
+    "size": 4871784,
+    "sha256": "a093a22ce5aa5a77d3fd1a3ee4153542e34dbcb9d4c12cb107adc210c5249dc3"
+  },
+  "macros": {
+    "FW_SOC_JZ4730": "0x1",
+    "FW_TASK_TABLE": "0x808af4e0",
+    "FW_TASK_CREATE_EXT": "0x8000f89c",
+    "FW_TASK_DELETE": "0x8000fa20",
+    "FW_TASK_DELAY": "0x8001063c",
+    "FW_TASK_RESUME": "0x80010550",
+    "FW_RAW_TICK": "0x80134f48",
+    "FW_TICK_IRQ_SLOT": "0x804a9f1c",
+    "FW_TICK_IRQ_HANDLER": "0x80134e0c",
+    "FW_CURRENT_TCB": "0x804a96e4",
+    "FW_OS_RUNNING": "0x804a9679",
+    "FW_SCHED_LOCK": "0x804a9678",
+    "FW_INT_NESTING": "0x804a96e1",
+    "FW_GLOBAL_ALLOC": "0x80006eb8",
+    "FW_GLOBAL_FREE": "0x80006074",
+    "FW_RUNTIME_BASE": "0x81c00000",
+    "FW_SDRAM_START": "0x80004000",
+    "FW_SDRAM_END": "0x82000000",
+    "FW_LCD_WIDTH": "0x8037f9d4",
+    "FW_LCD_HEIGHT": "0x8037f9d8",
+    "FW_LCD_BITS": "0x8037f9dc",
+    "FW_LCD_BASE": "0xb3050000",
+    "FW_SCREEN_WIDTH": "0xf0",
+    "FW_SCREEN_HEIGHT": "0x140",
+    "FW_UDC_BASE": "0xb3040000",
+    "FW_USB_IRQ_MASK": "0x1000",
+    "FW_INTC_IMR": "0xb0001004",
+    "FW_INTC_IMSR": "0xb0001008",
+    "FW_INTC_IMCR": "0xb000100c",
+    "FW_BDA_SEED": "0x8025dcc0",
+    "FW_GUI_TABLE": "0x8025d4a0",
+    "FW_FS_TABLE": "0x8025d410",
+    "FW_SYS_TABLE": "0x8025d2a0",
+    "FW_MEM_TABLE": "0x8025dcdc",
+    "FW_RES_TABLE": "0x8025d370",
+    "FW_NATIVE_USB_INIT": "0x80190200",
+    "FW_NATIVE_USB_IRQ": "0x8019116c",
+    "FW_CPM_CLKGR": "0xb0000020",
+    "FW_CPM_USB_GATE_MASK": "0x1000000",
+    "FW_CPM_OPCR": "0xb000001c",
+    "FW_CPM_USB_PHY_MASK": "0x40",
+    "FW_CPM_CPCCR": "0xb0000000",
+    "FW_CPM_CPPCR": "0xb0000010",
+    "FW_USB_SBA_CTRL": "0xb3000000",
+    "FW_USB_SBA_MASK": "0x80",
+    "FW_USB_SBA_DEVICE_VALUE": "0x0",
+    "FW_USB_CABLE_GPIO_BASE": "0xb0010060",
+    "FW_USB_CABLE_GPIO_MASK": "0x2000000",
+    "FW_USB_CABLE_AUX_GPIO_BASE": "0x0",
+    "FW_USB_CABLE_AUX_GPIO_MASK": "0x0"
+  },
+  "guards": [
+    {
+      "name": "task_create_ext",
+      "address": "0x8000f89c",
+      "length": "0x184",
+      "crc32": "0x4ed432e"
+    },
+    {
+      "name": "task_delete",
+      "address": "0x8000fa20",
+      "length": "0x240",
+      "crc32": "0x8616942a"
+    },
+    {
+      "name": "task_delay",
+      "address": "0x8001063c",
+      "length": "0x98",
+      "crc32": "0xe775e1b"
+    },
+    {
+      "name": "task_resume",
+      "address": "0x80010550",
+      "length": "0xec",
+      "crc32": "0xe1b545c7"
+    },
+    {
+      "name": "task_stack_init",
+      "address": "0x8000ada0",
+      "length": "0xf0",
+      "crc32": "0xb76be460"
+    },
+    {
+      "name": "tcb_init",
+      "address": "0x8000b6f4",
+      "length": "0x1a0",
+      "crc32": "0xc4c52a29"
+    },
+    {
+      "name": "scheduler",
+      "address": "0x8000b490",
+      "length": "0xd8",
+      "crc32": "0x7e79734c"
+    },
+    {
+      "name": "global_alloc",
+      "address": "0x80006eb8",
+      "length": "0x50",
+      "crc32": "0x58140983"
+    },
+    {
+      "name": "global_free",
+      "address": "0x80006074",
+      "length": "0x48",
+      "crc32": "0x524b9475"
+    },
+    {
+      "name": "tick_irq",
+      "address": "0x80134e0c",
+      "length": "0xa8",
+      "crc32": "0xefadfa25"
+    },
+    {
+      "name": "raw_tick",
+      "address": "0x80134f48",
+      "length": "0xc",
+      "crc32": "0x21e32cca"
+    },
+    {
+      "name": "irq_register",
+      "address": "0x80004a34",
+      "length": "0x130",
+      "crc32": "0x629dd888"
+    },
+    {
+      "name": "tick_init",
+      "address": "0x80134eb4",
+      "length": "0x94",
+      "crc32": "0xe84ee93c"
+    },
+    {
+      "name": "usb_init",
+      "address": "0x80190200",
+      "length": "0x38c",
+      "crc32": "0xa8b75cbd"
+    },
+    {
+      "name": "usb_irq",
+      "address": "0x8019116c",
+      "length": "0x40",
+      "crc32": "0x1a85c021"
+    },
+    {
+      "name": "bda_seed_copy",
+      "address": "0x800203a0",
+      "length": "0x34",
+      "crc32": "0x79f9ea70"
+    },
+    {
+      "name": "bda_seed",
+      "address": "0x8025dcc0",
+      "length": "0x20",
+      "crc32": "0x91bfc490"
+    },
+    {
+      "name": "lcd_geometry",
+      "address": "0x8037f9d4",
+      "length": "0xc",
+      "crc32": "0xe0abb6bd"
+    },
+    {
+      "name": "lcd_descriptor_init",
+      "address": "0x80007444",
+      "length": "0x148",
+      "crc32": "0xdcd45cb7"
+    },
+    {
+      "name": "external_power_gpio_setup",
+      "address": "0x80028774",
+      "length": "0xa8",
+      "crc32": "0x2c0072f7"
+    },
+    {
+      "name": "external_power_gpio_query",
+      "address": "0x8002975c",
+      "length": "0x18",
+      "crc32": "0x131ba81a"
+    }
+  ]
+}

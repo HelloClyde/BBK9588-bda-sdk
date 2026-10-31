@@ -5,6 +5,15 @@ All notable SDK and packer changes are recorded here. The project follows
 
 ## Unreleased
 
+- Add exact-ROM 9688 V2.32 camera and firmware-owned WAV recording modules,
+  including public aggregate headers, bounded camera warmup, asynchronous
+  recording completion, and compile-checked examples.
+- Record JZ4740 hardware evidence for QVGA capture/RGB565 conversion, 3.072 s
+  mono 16 kHz WAV capture/readback, and restored heap/resources; keep the
+  JZ4730 binding and existing raw PCM capture maturity unchanged.
+- Document native file-seek position returns, first-frame exposure settling,
+  and firmware-specific WAV header fields.
+
 - Prepare the repository for an initial open-source SDK release.
 - Add installable `bda-pack`, `bda-validate`, and `bda-icon` commands.
 - Package verified public headers with the Python wheel.

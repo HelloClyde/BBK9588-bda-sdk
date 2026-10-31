@@ -1,14 +1,16 @@
 # 已验证 BDA 示例
 
-本目录只收录已经在 BBK 9588 真机或 8013 完整 NAND 模拟器中形成运行闭环的
-开发者示例。逆向候选和危险探针保留在 `reverse/examples/`，不会混入这里。
+本目录收录使用公开 SDK 的开发者示例，主要基线是在 BBK 9588 真机或 8013 完整
+NAND 模拟器中形成运行闭环的程序。9688 媒体模块另有 JZ4740 真机 EXEC 证据；本次
+新增的最小示例本身仅完成编译和静态校验，表中单独标明。逆向候选和危险探针保留在
+`reverse/examples/`，不会混入这里。
 
 所有源码只包含 `sdk/include/` 中的公开模块头；复杂示例显式列出窗口、绘图、输入等
 依赖，扫雷等完整程序也可以使用聚合 `bda_sdk.h`。示例不会访问
 `reverse/bda_research_sdk.h`。
 
-每个叶子目录中的 `.bda` 都由同目录 `.c` 构建，并已通过 header、entry、checksum 和
-图标区静态校验：
+已提交的 `.bda` 由同目录 `.c` 构建，并通过 header、entry、checksum 和图标区
+静态校验。新增 9688 示例保留源码并纳入编译回归，不随源码提交现场拍摄或录音：
 
 ```text
 basic/hello_world/        hello_world_msgbox.c + HelloWorld.bda
@@ -30,6 +32,8 @@ system/three_button_dialog/ three_button_dialog_demo.c + ThreeButtonDialog.bda
 system/help_page/           help_page_demo.c + HelpPage.bda
 system/audio_pcm/         audio_pcm_demo.c + AudioPcm.bda
 system/audio_capture/     audio_capture_demo.c + AudioCapture.bda
+system/camera/            camera_demo.c (9688 V2.32)
+system/recording/         recording_demo.c (read-only entry + lifecycle helpers)
 gui/control_gallery/      control_gallery_demo.c + ControlGallery.bda
 gui/custom_control/       custom_control_demo.c + CustomControl.bda
 gui/gif_player/           gif_player_demo.c + GifPlayer.bda
@@ -56,6 +60,8 @@ gui/gif_player/           gif_player_demo.c + GifPlayer.bda
 | `system/help_page/` | 系统帮助页、同步返回和父 Frame 用法 | 模拟器 | [API 文档](../docs/verified/help_page_api.md) |
 | `system/audio_pcm/` | 22050 Hz raw PCM、衰减控制和安全 stop | 模拟器 + 真机 | [API 文档](../docs/verified/audio_pcm_api.md) |
 | `system/audio_capture/` | 16000 Hz 实时 PCM 录音、波形和多固件 profile 保护 | 9588/JZ4730 真机；其他 profile 为静态候选 | [API 文档](../docs/verified/audio_capture_api.md) |
+| `system/camera/` | 9688 QVGA 13 帧预热、最后帧转换、关闭 | 示例：编译校验；SDK：JZ4740 真机 EXEC | [API 文档](../docs/verified/9688_media_api.md) |
+| `system/recording/` | 9688 原生 WAV 格式识别与异步生命周期 helper；入口不录音 | 示例：编译校验；SDK：JZ4740 真机 EXEC | [API 文档](../docs/verified/9688_media_api.md) |
 | `gui/control_gallery/` | 文本、按钮、列表、组合框、进度条和 toolbar | 模拟器 | [控件 API](../docs/verified/controls_api.md) |
 | `gui/custom_control/` | 自定义类注册、局部绘制、触摸和注销 | 模拟器 | [教程](../docs/tutorials/custom_controls.md) |
 | `gui/gif_player/` | 内存 GIF89a 加载、定时换帧和销毁 | 模拟器 | [控件 API](../docs/verified/controls_api.md) |
@@ -136,6 +142,18 @@ bda-pack example\system\audio_capture\audio_capture_demo.c `
   --title AudioCapture --category 9 `
   -o example\system\audio_capture\AudioCapture.bda
 ```
+
+9688 专用媒体示例：
+
+```powershell
+bda-pack example\system\camera\camera_demo.c --title Camera9688 --category 9 `
+  -o build\Camera9688.bda
+bda-pack example\system\recording\recording_demo.c --title Record9688 --category 9 `
+  -o build\Recording9688.bda
+```
+
+摄像头示例访问传感器，但不显示或保存照片。录音入口仅识别格式，不开启麦克风或
+创建文件；同文件 helper 应接入应用自己的 GUI 事件循环，不得用忙等等待录音结束。
 
 ![扫雷运行画面](../docs/verified/assets/game_rendering_minesweeper.png)
 

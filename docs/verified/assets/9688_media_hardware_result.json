@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "date": "2026-11-01",
+  "timezone": "Asia/Shanghai",
+  "environment": "physical BBK 9688 V2.32 / JZ4740 through independent Debug EXEC RAM probes",
+  "debugger_bda_sha256": "fe9d5b7ef5aebd6142c4ddb79e0bc721362e49bb1ad3cd8d5349a42a12346765",
+  "resident_image_id": "49d6b0c7",
+  "raw_firmware_sha256": "7ec707b69a1f4fa7016856b2eba6900412d02d7daefc8b4d11654c63731abca0",
+  "camera": {
+    "width": 320,
+    "height": 240,
+    "format": "YUYV",
+    "bytes": 153600,
+    "open_start_poll_close_return": 0,
+    "completed_frames": 13,
+    "discarded_frames": 12,
+    "first_frame_sample_luma_mean": 47.84375,
+    "saved_frame_sample_luma_mean": 86.734375,
+    "raw_sha256": "e38103a8514c6b57bf70e3504f4c5a103501dff6c8c77c4bcdde15c71673e1dd",
+    "rgb565_sha256": "6dd1d9ca1e3f4564db7db3559bc44ea8eaea06bbb01e2f02c955d4df66aeadf5",
+    "sdk_conversion_matches_independent_reference_bytes": true,
+    "visual_review": "actual objects and a cable visible in dim light; first unprimed frame was near grey"
+  },
+  "recording": {
+    "bytes": 98364,
+    "sha256": "586fe0397b5c0f0b873b2349a8e30601448d5c83b6c0347e18296a419d3af294",
+    "riff_size": 98356,
+    "chunks": [
+      {
+        "id": "fmt ",
+        "offset": 12,
+        "bytes": 32
+      },
+      {
+        "id": "data",
+        "offset": 52,
+        "bytes": 98304
+      }
+    ],
+    "format_tag": 1,
+    "channels": 1,
+    "sample_rate": 16000,
+    "byte_rate": 32000,
+    "native_block_align": 256,
+    "bits_per_sample": 16,
+    "pcm_bytes": 98304,
+    "duration_seconds": 3.072,
+    "sample_min": -178,
+    "sample_max": 2228,
+    "sample_rms": 1193.0635199955368,
+    "nonzero_samples": 41128,
+    "unique_samples": 520,
+    "callback_completed": true,
+    "native_error": 0,
+    "seek_contract": "FS+0x10 returns new position on success, -1 on failure; EOF and nonzero-offset reads verified"
+  },
+  "cleanup": {
+    "free_heap_before_bytes": 11566556,
+    "free_heap_after_bytes": 11566556,
+    "camera_closed": true,
+    "camera_copies_freed": true,
+    "recording_callback_completed": true,
+    "native_error": 0,
+    "recording_finished": true,
+    "file_closed": true,
+    "exec_state": 0,
+    "usb_fault": 0,
+    "last_error": 0,
+    "bad_frames": 0,
+    "debugger_left_running": true
+  },
+  "public_sdk_migration_probe": {
+    "scope": "new public SDK device/chip/profile/guards/init; no camera or mic opened",
+    "output_words": [
+      1,
+      0,
+      4740,
+      9688,
+      2,
+      0,
+      0,
+      0
+    ],
+    "result": 0,
+    "cancel_flags": 0,
+    "module_sha256": "95f7043309d956ea5796f4f7d1b669c079ae38fb377e1d01c33705efcb4890dc",
+    "headers_sha256": {
+      "bda_9688_camera.h": "251c7c4915739feb72848f282fa3d3a851ee2cf174fcb72fbd1688e7eaf942c0",
+      "bda_9688_media.h": "10b181a0b3966afe00887033a0a61fe1ce7645d61ff5a2edcf6d50499646476e",
+      "bda_9688_platform.h": "ca6e3f8443982cb30840f8104df4a037ec31f017848552861ceda009985d8fd6",
+      "bda_9688_recording.h": "d68ec13476068f855195c74bb8c406ccbad4803d4073c651f47970a37f88a8b6"
+    },
+    "module_reset": true
+  },
+  "example_bda_validation": "compile and container validation only; public lifecycle hardware evidence uses the independent EXEC probes",
+  "not_covered": [
+    "JZ4730 physical device",
+    "intelligible speech",
+    "simultaneous camera and recorder",
+    "long-duration capture",
+    "abnormal cable-removal cleanup"
+  ],
+  "private_artifacts_included": false
+}

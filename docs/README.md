@@ -26,6 +26,10 @@
 | [`bda_dialogs.h`](../sdk/include/bda_dialogs.h) | 消息框、确认框、帮助页和文件选择器 |
 | [`bda_controls.h`](../sdk/include/bda_controls.h) | 内建控件、GIF 与自定义控件 |
 | [`bda_audio.h`](../sdk/include/bda_audio.h) | raw PCM 播放，以及受固件保护的实时录音 |
+| [`bda_9688_media.h`](../sdk/include/bda_9688_media.h) | 聚合 9688 精确平台、摄像头和固件持有 WAV 录音 |
+| [`bda_9688_platform.h`](../sdk/include/bda_9688_platform.h) | 9688 V2.32 ROM 门禁与成熟度查询 |
+| [`bda_9688_camera.h`](../sdk/include/bda_9688_camera.h) | 320×240 YUYV 抓帧、RGB565 转换和关闭 |
+| [`bda_9688_recording.h`](../sdk/include/bda_9688_recording.h) | 异步原生 WAV 录音、完成回调和文件收尾 |
 
 公开应用不要包含 `reverse/bda_research_sdk.h`。该文件中的名称、参数和生命周期仍可
 变化，也可能包含真机会死锁的实验接口。
@@ -57,6 +61,7 @@
 | 内建控件、GIF 与自定义类 | [controls_api.md](verified/controls_api.md) | 8013 模拟器 |
 | Raw PCM 音频生命周期 | [audio_pcm_api.md](verified/audio_pcm_api.md) | 模拟器 + 真机 |
 | 实时 PCM 录音 | [audio_capture_api.md](verified/audio_capture_api.md) | 9588/JZ4730 真机；其他 profile 为静态候选 |
+| 9688 摄像头与原生 WAV 录音 | [9688_media_api.md](verified/9688_media_api.md) | 9688 V2.32/JZ4740 真机；JZ4730 静态候选 |
 
 ![图形图元验证](verified/assets/graphics_primitives_bda_verified.png)
 

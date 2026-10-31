@@ -21,6 +21,10 @@
 | `bda_dialogs.h` | Message Box、确认框、帮助页和文件选择器 |
 | `bda_controls.h` | 内建控件、GIF 和自定义控件类 |
 | `bda_audio.h` | raw PCM 播放，以及 9588/9688 精确固件 profile 保护的实时录音 |
+| `bda_9688_platform.h` | 9688 V2.32 精确 ROM 识别、机器码守卫和公开成熟度 |
+| `bda_9688_camera.h` | 9688 QVGA YUYV 抓帧、RGB565 转换和独占清理 |
+| `bda_9688_recording.h` | 9688 固件持有 WAV 的异步录音与完成收尾 |
+| `bda_9688_media.h` | 聚合上述三个 9688 媒体模块 |
 | `bda_sdk.h` | 聚合上述全部公共模块 |
 
 例如，一个带窗口、按键和绘图的游戏可以只包含：
@@ -56,3 +60,4 @@ helper 位于 `bda/detail/runtime.h`，它是公开 wrapper 的实现细节，�
 - [内建控件](verified/controls_api.md)
 - [Raw PCM 音频](verified/audio_pcm_api.md)
 - [实时 PCM 录音](verified/audio_capture_api.md)
+- [9688 摄像头与原生 WAV 录音](verified/9688_media_api.md)
